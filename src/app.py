@@ -18,6 +18,7 @@ from itertools import combinations
 import networkx as nx
 from nltk.corpus import stopwords
 import matplotlib.pyplot as plt
+import os
 
 
 # Load data
@@ -30,11 +31,11 @@ data['Date'] = pd.to_datetime(data['Date'], errors='coerce')
 if 'Date' in data.columns:
    data['Year'] = data['Date'].dt.year
 
-
+base_dir = os.path.dirname(__file__)
 # New section for psychological aspects of infertility
 # Load new data
-file_path_psycho = 'C:/Users/33770/Documents/preprocessed_psychopma.csv'
-df_psycho = pd.read_csv(file_path_psycho)
+preprocessed_psychopma_path = os.path.join(base_dir, '..', 'assets', 'preprocessed_psychopma.csv')
+preprocessed_psychopma_data = pd.read_csv(preprocessed_psychopma_path)
 
 
 # Ensure the Date column is parsed as datetime
@@ -91,6 +92,9 @@ navbar = dbc.Navbar(
    style={'padding': '15px', 'border-radius': '0px'}  # No rounded borders
 )
 
+logo_doctissimo_src = '/assets/Logo_de_Doctissimo.jpg'
+logo_fivfr_src = '/assets/logo-fivfr.png'
+
 
 # Presentation section
 # Presentation section
@@ -106,8 +110,8 @@ def presentation_page():
                           style={'color': 'black', 'text-align': 'center'}),
                    html.Div(
                        [
-                           html.Img(src='C:/Users/33770/Documents/Logo_de_Doctissimo.jpg', height='200px', style={'margin-right': '20px'}),
-                           html.Img(src='C:/Users/33770/Documents/logo-fivfr.png', height='100px')
+                           html.Img(src=logo_doctissimo_src, height='200px', style={'margin-right': '20px'}),
+                           html.Img(src=logo_fivfr_src, height='100px')
                        ],
                        style={'text-align': 'center'}
                    ),
@@ -154,9 +158,13 @@ def application_page():
 
 
 # Read GeoJSON and data files
-data_path = 'C:/Users/33770/Documents/data.csv'
-geojson_path = 'C:/Users/33770/Documents/regions-version-simplifiee.geojson'
+data_path = os.path.join(base_dir, '..', 'assets', 'data.csv')
+base_dir = os.path.dirname(__file__)
+geojson_path = os.path.join(base_dir, '..', 'assets', 'regions-version-simplifiee.geojson')
 
+# Load and use the GeoJSON data as needed
+with open(geojson_path) as f:
+    geojson_data = f.read()
 
 data_geo = pd.read_csv(data_path, delimiter=';')
 gdf = gpd.read_file(geojson_path)

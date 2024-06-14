@@ -236,9 +236,11 @@ m.save('regions_pma_fiv_map.html')
 # Convert the Folium map to HTML for integration in Dash
 folium_map_html = m.get_root().render()
 
+# Relative path to the CSV file in the assets directory
+doctissimo_file_path = os.path.join(base_dir, '..', 'assets', 'pma_doctissimo_posts.csv')
 
 # Load the Doctissimo dataset
-dataset = pd.read_csv("C:/Users/33770/Documents/pma_doctissimo_posts.csv")
+dataset = pd.read_csv(doctissimo_file_path)
 
 
 # Remove rows containing empty strings or NA in critical columns

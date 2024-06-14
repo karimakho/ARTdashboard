@@ -21,8 +21,13 @@ import matplotlib.pyplot as plt
 import os
 
 
+# Base directory where the script is located
+base_dir = os.path.dirname(__file__)
+
+# Relative path to the CSV file in the assets directory
+file_path = os.path.join(base_dir, '..', 'assets', 'data_predictions.csv')
+
 # Load data
-file_path = 'C:/Users/33770/Documents/data_predictions.csv'
 data = pd.read_csv(file_path)
 
 

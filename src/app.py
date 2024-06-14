@@ -40,7 +40,7 @@ base_dir = os.path.dirname(__file__)
 # New section for psychological aspects of infertility
 # Load new data
 preprocessed_psychopma_path = os.path.join(base_dir, '..', 'assets', 'preprocessed_psychopma.csv')
-preprocessed_psychopma_data = pd.read_csv(preprocessed_psychopma_path)
+df_psycho = pd.read_csv(preprocessed_psychopma_path)
 
 
 # Ensure the Date column is parsed as datetime
